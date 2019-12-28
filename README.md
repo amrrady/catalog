@@ -23,6 +23,7 @@ To start on this project, you'll need make sure that all these tools are install
 * Python version: 3.7
 * sqlalchemy, sqlite database
 * Flask
+* oauth2client
 
 or you can use Vagrant by following the next steps
 
@@ -33,9 +34,9 @@ Ubuntu users: If you are running Ubuntu 14.04, install VirtualBox using the Ubun
 ### Install Vagrant
 Vagrant is the software that configures the VM and lets you share files between your host computer and the VM's filesystem. Download it from vagrantup.com
 ### Download the VM configuration
-Use Github to fork and clone this [repository](https://github.com/udacity/fullstack-nanodegree-vm)
+* Use Github to fork and clone this [repository](https://github.com/udacity/fullstack-nanodegree-vm)
 
-Change to this directory in your terminal with `cd`. Inside, you will find another directory called _vagrant_ . Change directory to the vagrant directory.
+* Change to this directory in your terminal with `cd`. Inside, you will find another directory called _vagrant_ . Change directory to the vagrant directory.
 
 ### Start the virtual machine
 
