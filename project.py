@@ -86,8 +86,8 @@ def gconnect():
 
     # Check that the access token is valid.
     access_token = credentials.access_token
-    url = 'https://www.googleapis.com/\
-        oauth2/v2/tokeninfo?access_token={}'.format(access_token)
+    url = 'https://www.googleapis.com/oauth2'
+    url += '/v2/tokeninfo?access_token={}'.format(access_token)
     result = requests.get(url).json()
     # If there was an error in the access token info, abort.
     if 'error' in result:
@@ -146,10 +146,10 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius:\
-         150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
-    flash("you are now logged in as {}".format(login_session['username']))
-    print("done!")
+    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;'
+    output += '-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    flash("you are now logged in as %s" % login_session['username'])
+    print ("done!")
     return output
 
 
@@ -162,15 +162,14 @@ def gdisconnect():
         flash('Current user not connected.')
         return redirect(url_for('showCategories'))
 
-    result = requests.post(
+    result = requests.get(
         'https://accounts.google.com/o/oauth2/revoke',
-        params={
-            'token': access_token},
-        headers={
-            'content-type': 'application/x-www-form-urlencoded'}).json()
-    if (('status' in result and result['status'] == '200') or
-        (('error_description' in result) and
-            (result['error_description'] == 'Token expired or revoked'))):
+        params={'token': access_token},
+        headers={'content-type': 'application/x-www-form-urlencoded'})
+    tokenExpired = (('error_description' in result.json()) and 
+        (result.json()['error_description'] == 'Token expired or revoked'))
+
+    if((result.status_code == 200) or tokenExpired):
         disconnect()
         flash("You have successfully been logged out.")
         return redirect(url_for('showCategories'))

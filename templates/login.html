@@ -68,6 +68,7 @@
           Login with Google
         </a>
   </div>
+  <div id="result"></div>
 
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
@@ -90,9 +91,7 @@
             success: function (result) {
               if (result) {
                 $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...');
-                setTimeout(function () {
-                  window.location.href = "/";
-                }, 4000);
+                setTimeout(function () {window.location.href = "/";}, 1000);
               } else if (authResult['error']) {
                 console.log('There was an error: ' + authResult['error']);
               } else {
